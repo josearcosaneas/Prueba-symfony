@@ -1,0 +1,65 @@
+inicio:
+    path:     /
+    defaults: { _controller: JAASeguroBundle:Ficha:index2 }
+
+home:
+    path:  /inicio
+    defaults: { _controller: JAASeguroBundle:Ficha:index2 }
+
+about:
+    path:  /about
+    defaults: { _controller: JAASeguroBundle:Ficha:about }
+    requirements:
+        _method:  GET
+        
+contact:
+    path:  /contact
+    defaults: { _controller: JAASeguroBundle:Ficha:contact }
+    requirements:
+        _method:  GET|POST
+    
+registro:
+    path:  /registro
+    defaults: { _controller: JAASeguroBundle:Default:index }
+
+reset:
+    path:  /reset
+    defaults: { _controller: JAASeguroBundle:Default:reset}
+
+login:
+  path: /login
+  defaults: { _controller: JAASeguroBundle:Default:login }
+
+login_check:
+   path: /login_check
+
+logout:
+  path: /logout
+
+new_ficha:
+  path: /nuevo-ficha
+  defaults: { _controller: JAASeguroBundle:Ficha:new }
+  
+edit_ficha:
+  path: /editar-ficha/{ficha}
+  defaults: { _controller: JAASeguroBundle:Ficha:edit, ficha:1 }
+  
+delete_ficha:
+  path: /delete-ficha/{ficha}
+  defaults: { _controller: JAASeguroBundle:Ficha:delete, ficha:1 }
+
+profile:
+  path:  /profile
+  defaults: { _controller: JAASeguroBundle:Default:profile }
+
+fichas: 
+   path: /fichas
+   defaults: {_controller: JAASeguroBundle:Ficha:index3, page:1}
+   
+mis_fichas:
+   path:  /fichas/{page}
+   defaults: {_controller: JAASeguroBundle:Ficha:index3, page:1}
+   
+search:
+   path:  /search
+   defaults: {_controller:JAASeguroBundle:Ficha:search, page: 1}

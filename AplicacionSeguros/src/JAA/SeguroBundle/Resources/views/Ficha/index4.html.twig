@@ -1,0 +1,57 @@
+{% extends "::plantilla.html.twig" %}
+
+{%block categorias%}
+        {% for category in categories %}
+             <li><a href="#">{{ category.name }}</a></li>
+        {% endfor %}
+{%endblock%}
+ 
+{%block content %}
+			
+	 		    	
+		   <section class="main-col">
+                {% block body %}{% endblock %}
+            
+            <aside class="sidebar">
+                {% block sidebar %}{% endblock %}
+            </aside>
+           
+								
+			<form class=" col-xs-5" action="" method="post" {{ form_enctype(form) }}>
+			{{ form_widget(form) }}
+			{{ form_errors(form) }}
+			</form>
+		
+		
+        {% for Ficha in Ficha %}
+             <article class="Ficha">
+                 
+                  
+                 <div class="fich_content col-lg-10 col-md-8 col-sm-8 col-xs-8">
+                    <h3><a href="{{ path('edit_ficha', {'ficha': Ficha.id}) }}">{{ Ficha.title }}</a></h3>
+                    <p class = "thick">Tipo de Ficha:</p><p> {{ Ficha.tipoficha.name }}</p>
+                    <p class = "thick">Descripción: </p><p>{{Ficha.description}}</p>
+                    <p class = "thick">Valor:</p> <p>{{Ficha.valor}}</p>
+                    
+                   <p>
+                       <a href="{{ path('edit_ficha', {'ficha': Ficha.id}) }}" class="btn btn-warning">Editar</a>
+                       <a href="{{ path('delete_ficha', {'ficha': Ficha.id}) }}" class="btn btn-danger">Eliminar</a>
+                   </p>
+                </div>
+              
+             </article>
+            
+        {% endfor %}
+        <div class="clearfix"></div>
+
+        <ul class="pagination">
+          <li><a href="#">&laquo;</a></li>
+            {% for i in 1..pagesCount %}
+                <li><a href="{{ path('mis_fichas', {'page': i}) }}">{{ i }}</a></li> 
+            {% endfor %}
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+ 
+{%endblock%}
+{%block opciones%}
+{% endblock %}

@@ -1,0 +1,21 @@
+jaa_seguro_homepage:
+    pattern:     /
+    defaults: { _controller: JAASeguroBundle:Default:index }
+
+home:
+    pattern:  /inicio/{page}
+    defaults: { _controller: WebBlogBundle:Posts:index, page:1 }
+    
+registro:
+    pattern:  /registro
+    defaults: { _controller: WebBlogBundle:Default:index }
+
+login:
+  pattern: /login
+  defaults: { _controller: WebBlogBundle:Default:login }
+
+login_check:
+   pattern: /login_check
+
+logout:
+  pattern: /logout

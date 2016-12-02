@@ -1,0 +1,43 @@
+{% extends '::plantilla.html.twig' %}
+
+{% block title %}Contact{% endblock%}
+
+{% block content %}
+<style type="text/css">
+  div { margin-bottom: 5px; }
+  label { float: left; margin-right: 10px; text-align: right; width: 100px; font-weight: bold; vertical-align: top; padding-top: 10px; }
+  input[type="text"],
+  input[type="email"]
+    { width: 500px; line-height: 26px; font-size: 20px; min-height: 26px; }
+ textarea { width: 500px; height: 150px; line-height: 26px; font-size: 20px; }
+ input[type="submit"] { margin-left: 110px; width: 508px; line-height: 26px; font-size: 20px; min-height: 26px; }
+ ul li { color: #ff0000; margin-bottom: 5px; }
+</style>
+
+    <header>
+        <h3>Contacto Un lugar Seguro</h3>
+    </header>
+
+
+    <form action="{{ path('contact') }}" method="post" {{ form_enctype(form) }} class="usuario">
+  	
+        {{ form_row(form.name) }}
+		
+        {{ form_row(form.email) }}
+        
+		{{ form_row(form.subject) }}
+        
+		{{ form_row(form.body) }}
+		
+		<input type="submit" value="Enviar" class="btn btn-success"/>
+	</form>
+	
+	
+{% endblock %}
+
+
+{%block identificate %}
+{% endblock %}
+
+{%block opciones%}
+{% endblock %}

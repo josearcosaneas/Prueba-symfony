@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+
+    <head>
+        <meta charset="utf8"/>
+        <title>{% block title %} Un Lugar Seguro {% endblock %}</title>
+        <!-- jQuery CDN -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    
+
+	
+	
+	</head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        </button>
+                        <a class="navbar-brand" href="{{path("inicio")}}"> Un Lugar Seguro </a>
+						
+		
+					</div><!-- header -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                       
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if is_granted('ROLE_USUARIO') or is_granted('ROLE_ADMIN') %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{app.user.name}} {{app.user.surname}}      
+                                     <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{path("new_ficha")}}">Nuevo ficha</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{path("logout")}}">Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+							{%else%}
+						    <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                          
+                                     <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ path('about')}}">{% trans %}About{% endtrans %}</a></li>
+                                    <li class="divider"></li>
+									
+                                    <li><a href="{{path('contact')}}">{% trans %} Contact{% endtrans %}</a></li>
+                                </ul>
+                            </li>
+                            {%endif%}
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+		<section>
+		
+		{%block opciones%}
+		{% if is_granted('ROLE_USUARIO') or is_granted('ROLE_ADMIN') %}
+				<div class="list-group center-block ">
+				    <ul class="list-group center-block " >
+				       
+				        <li >
+				            <a href="{{path('fichas')}}"  class=" col-xs-4 btn btn-warning" >Mis fichas     </a>
+				        </li>
+						<br/>
+						<!--<li>
+				            <a href="{{path('search')}}" class="col-xs-4 btn btn-warning" >Buscar ficha   </a>
+				        </li>
+						<br/>-->
+				        <li>
+				            <a href="{{path('new_ficha')}}"class="col-xs-4 btn btn-warning">Nueva Ficha    </a>
+				        </li>
+						<br/>
+				        <li>
+				            <a href="{{path('profile')}}" class="col-xs-4 btn btn-warning">Perfil Personal</a>
+				        </li>
+						<br/>
+				        <li>
+				            <a href="{{path('contact')}}"  class="col-xs-4 btn btn-warning">Contacto       </a>
+				        </li>
+						<br/>
+				        <li>
+				            <a href="{{ path('about')}}"class="col-xs-4 btn btn-warning" >Sobre          </a>
+				        </li>
+						<br/>
+				        <li>
+				            <a href="{{ path('logout')}}" class="col-xs-4 btn btn-warning" >Salir           </a>
+				        </li>
+						<br/>
+				     </ul>
+				</div>
+		{%endif%}
+		{%endblock%}
+		</section>
+        <section class="content col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                {%block content %} Contenido vacio por defecto {%endblock%}
+        </section>
+       
+        <sidebar class="sidebar col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                {%block identificate %} 
+                    {% if is_granted('ROLE_USUARIO') or is_granted('ROLE_ADMIN') %} 
+                        {#{dump(app.user)}#}
+                    {% else %}
+                        <h3>Identificate</h3>
+                        <hr/>
+                        {% for mensaje in app.session.flashbag().get('login') %}
+                        <p class="info">{{ mensaje }}</p>
+                        {% endfor %}
+                        {% if error is defined %}
+                                No estas identificado
+                                {{error.message}}
+                        {% endif %}  
+                            <form method="post" action="{{path('login_check')}}">
+                                <label>Email</label>
+                                <input type="email" name="_username" value="" class="form-control"/>
+                                
+                                <br/>
+                                <label>Contraseña</label>
+                                <input type="password" name="_password" class="form-control"/>
+                                
+                                <br/>
+                                <input type="submit" value="Entrar" class="btn btn-success"/>
+                                <a href="{{path("registro")}}" class="btn btn-warning">Registrate aquí</a>
+                            </form>
+						 	<br/>
+				            <a href="{{ path('reset')}}">Recuperar contraseña</a>
+						    <p>
+							<input type="checkbox" id="remember_me" name="_remember_me" checked />
+							<label for="remember_me">Remember me</label> 
+							</p>
+                    {% endif %}
+
+                {%endblock%}
+            </sidebar>   
+        <div class="clearfix"></div>
+        <footer>
+        <hr/>
+         &copy; programacion-granada.es
+        </footer>
+        </body>
+    </html>

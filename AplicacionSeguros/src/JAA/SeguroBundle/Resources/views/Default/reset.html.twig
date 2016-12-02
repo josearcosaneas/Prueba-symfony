@@ -1,0 +1,24 @@
+{% extends '::plantilla.html.twig' %}
+
+{% block title %}Reestabler contraseña{% endblock%}
+{%block opciones %}{%endblock%}
+{% block content %}
+
+
+
+	{% for mensaje in app.session.flashbag().get('info') %}
+	<p class="info">{{ mensaje }}</p>
+	{% endfor %}
+	<form action="{{ path('reset') }}" method="post" {{ form_enctype(reset_form) }} >
+  	
+        {{ form_row(reset_form.email) }}
+        			
+		<input type="submit" value="Enviar" class="btn btn-success"/>
+	</form>
+
+{% endblock %}
+
+
+{%block identificate %}
+{% endblock %}
+{%block categorias%}{%endblock%}

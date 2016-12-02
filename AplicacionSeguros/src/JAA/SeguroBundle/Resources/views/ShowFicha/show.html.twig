@@ -1,0 +1,16 @@
+{% extends 'JAASeguroBundle::plantilla.html.twig' %}
+
+{% block title %}{{ fichla.title }}{% endblock %}
+
+{% block body %}
+    <article class="ficha">
+        <header>
+            <div class="date"><time datetime="{{ ficha.created|date('c') }}">{{ ficha.created|date('l, F j, Y') }}</time></div>
+            <h2>{{ ficha.title }}</h2>
+        </header>
+        <img src="{{ asset(['images/', ficha.image]|join) }}" alt="{{ ficha.title }} image not found" class="large" />
+        <div>
+            <p>{{ ficha.valor }}</p>
+        </div>
+    </article>
+{% endblock %}

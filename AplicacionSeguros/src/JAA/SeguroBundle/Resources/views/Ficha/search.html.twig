@@ -1,0 +1,34 @@
+{% extends "::plantilla.html.twig" %}
+
+{%block categorias%}
+        
+{%endblock%}
+ 
+
+	
+{%block content %}
+<style type="text/css">
+  div { margin-bottom: 5px; }
+  label { float: left; margin-right: 10px; text-align: right; width: 100px; font-weight: bold; vertical-align: top; padding-top: 10px; }
+  input[type="text"],
+  input[type="email"]
+    { width: 500px; line-height: 26px; font-size: 20px; min-height: 26px; }
+ textarea { width: 500px; height: 150px; line-height: 26px; font-size: 20px; }
+ input[type="submit"] { margin-left: 110px; width: 508px; line-height: 26px; font-size: 20px; min-height: 26px; }
+ ul li { color: #ff0000; margin-bottom: 5px; }
+</style>
+			<h3>Busca por titulo</h3>
+	 		
+<form action="{{ path('search') }}" method="post" {{ form_enctype(search_form) }} class="usuario" >
+				
+		{{ form_row(search_form.title) }}
+							
+		<input type="submit" value="Buscar" class="btn btn-success"/>
+</form>    	
+		   
+ 
+{%endblock%}
+{%block opciones%}
+{% endblock %}
+
+

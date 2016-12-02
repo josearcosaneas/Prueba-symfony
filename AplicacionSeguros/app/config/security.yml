@@ -1,0 +1,31 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        JAA\SeguroBundle\Entity\Usuario: { algorithm: sha512, iterations: 10 }
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        usuario:
+            entity: { class: JAA\SeguroBundle\Entity\Usuario, property: email }
+
+    access_control:
+        - { path: ^/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/nuevo-ficha, roles: ROLE_USUARIO}
+        - { path: ^/editar-ficha, roles: ROLE_USUARIO}
+        - { path: ^/delete-ficha, roles: ROLE_USUARIO}
+    firewalls:
+        identificarse:
+          pattern: ^/*          
+          anonymous: ~
+          provider: usuario
+          form_login:
+            login_path: login
+            check_path: /login_check
+          logout:
+            path: logout
+            target: /
+          remember_me:
+            key: "%secret%"
+            lifetime: 604800 #  segundos
+
+

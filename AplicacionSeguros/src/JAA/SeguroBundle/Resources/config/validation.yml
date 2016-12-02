@@ -1,0 +1,8 @@
+JAA\SeguroBundle\Entity\Ficha:
+    properties: 
+     #title:
+      # - NotBlank: {message:"El titulo no puede estar vacío"}
+       
+     #description:
+      # - NotBlank: {message:"La descripción no puede estar vacía"}
+      
